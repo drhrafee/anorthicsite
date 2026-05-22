@@ -34,7 +34,7 @@ export function NavBar() {
           href="/contact"
           className="bg-cherry text-cream hover:bg-crimson transition-colors px-[2vw] py-[0.5vw] md:px-[1.2vw] md:py-[0.3vw] rounded-full font-medium text-[2.4vw] md:text-[1.4vw] lg:text-[0.88vw] uppercase tracking-[0.1em] md:tracking-[0.15em]"
         >
-          Let's talk
+          Let&apos;s talk
         </Link>
       </nav>
     </header>

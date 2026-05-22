@@ -1,4 +1,11 @@
 import AnimatedCounter from '@/components/AnimatedCounter';
+import { Sacramento } from 'next/font/google';
+import NeuralParticles from '@/components/NeuralParticles';
+
+const sacramento = Sacramento({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 export default function Page() {
   return (
@@ -29,13 +36,18 @@ export default function Page() {
 
           <div className="grid grid-cols-3 gap-2 md:gap-6 w-full mt-8 md:mt-12 lg:mt-16">
             <AnimatedCounter target={95} suffix="+" label="Lighthouse Speed Score" />
-            <AnimatedCounter target={100} suffix="%" label="Pure Code & Bespoke Design" />
+            <AnimatedCounter target={100} suffix="%" label="Custom Code & Design" />
             <AnimatedCounter target={24} suffix="/7" label="Autonomous AI Automation" />
           </div>
         </div>
       </section>
 
-      <div className="w-screen h-screen -mx-[4vw] lg:-mx-[2vw] mt-[4vw] lg:mt-[2vw] shrink-0" />
+      <div className="relative w-screen h-screen -mx-[4vw] lg:-mx-[2vw] mt-[4vw] lg:mt-[2vw] shrink-0 flex items-center justify-center overflow-hidden">
+        <NeuralParticles />
+        <h2 className={`${sacramento.className} relative z-10 text-[7vw] md:text-[5vw] lg:text-[4vw] text-crimson text-center leading-none select-none tracking-tight whitespace-nowrap italic`}>
+          no fluff, just hard work.
+        </h2>
+      </div>
     </div>
   );
 }

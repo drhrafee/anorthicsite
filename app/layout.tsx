@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   title: 'Anorthic Studio',
   description: 'AI Workflow Automation, Web Development, and Branding',
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
 };
 
