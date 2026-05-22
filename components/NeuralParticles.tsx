@@ -130,7 +130,7 @@ export default function NeuralParticles() {
       tick++;
       ctx.clearRect(0, 0, width, height);
 
-      // Calculate font size (30% of fluff word size: text-[7vw] md:text-[5vw] lg:text-[4vw])
+      // Calculate font size (65% of fluff word size: text-[7vw] md:text-[5vw] lg:text-[4vw])
       let fluffSize = 0;
       if (width < 768) {
         fluffSize = width * 0.07;
@@ -139,7 +139,7 @@ export default function NeuralParticles() {
       } else {
         fluffSize = width * 0.04;
       }
-      const fontSize = Math.max(9, fluffSize * 0.3);
+      const fontSize = Math.max(9, fluffSize * 0.65);
 
       // Smoothly fade mouse opacity in and out
       if (mouse.active) {
