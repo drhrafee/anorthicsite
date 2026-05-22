@@ -11,6 +11,7 @@
   --font-sacramento: var(--font-sacramento);
   --font-syne: var(--font-syne);
   --font-barlow: var(--font-barlow-condensed);
+  --font-bebas: var(--font-bebas-neue);
 
   /* cursor position — updated by CursorCircle */
   --cursor-x: -9999px;

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Krona_One, Geist, Sacramento, Syne, Barlow_Condensed } from 'next/font/google';
+import { Krona_One, Geist, Sacramento, Syne, Barlow_Condensed, Bebas_Neue } from 'next/font/google';
 import './globals.css';
 import { NavBar } from '@/components/NavBar';
 import CursorCircle from '@/components/CursorCircle';
@@ -33,6 +33,12 @@ const barlowCondensed = Barlow_Condensed({
   variable: '--font-barlow-condensed',
 });
 
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas-neue',
+});
+
 export const metadata: Metadata = {
   title: 'Anorthic Studio',
   description: 'AI Workflow Automation, Web Development, and Branding',
@@ -45,7 +51,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${kronaOne.variable} ${geist.variable} ${sacramento.variable} ${syne.variable} ${barlowCondensed.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${kronaOne.variable} ${geist.variable} ${sacramento.variable} ${syne.variable} ${barlowCondensed.variable} ${bebasNeue.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning className="antialiased min-h-screen bg-cream text-cherry selection:bg-crimson selection:text-cream flex justify-center relative overflow-x-hidden">
         <CursorCircle />
         <div
