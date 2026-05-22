@@ -45,8 +45,10 @@ export default function NeuralParticles() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let width = 0;
-    let height = 0;
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
 
     // Configuration
     const maxDistance = 140; // Connection distance between words
@@ -85,15 +87,20 @@ export default function NeuralParticles() {
       }
     };
 
+    init();
+
     // Handle resizing
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width: newWidth, height: newHeight } = entry.contentRect;
-        width = newWidth;
-        height = newHeight;
-        canvas.width = width;
-        canvas.height = height;
-        init();
+        if (newWidth === 0 || newHeight === 0) continue;
+        if (newWidth !== width || newHeight !== height) {
+          width = newWidth;
+          height = newHeight;
+          canvas.width = width;
+          canvas.height = height;
+          init();
+        }
       }
     });
     resizeObserver.observe(container);
@@ -131,13 +138,14 @@ export default function NeuralParticles() {
       ctx.clearRect(0, 0, width, height);
 
       // Calculate font size (65% of fluff word size: text-[7vw] md:text-[5vw] lg:text-[4vw])
+      const vw = window.innerWidth;
       let fluffSize = 0;
-      if (width < 768) {
-        fluffSize = width * 0.07;
-      } else if (width < 1024) {
-        fluffSize = width * 0.05;
+      if (vw < 768) {
+        fluffSize = vw * 0.07;
+      } else if (vw < 1024) {
+        fluffSize = vw * 0.05;
       } else {
-        fluffSize = width * 0.04;
+        fluffSize = vw * 0.04;
       }
       const fontSize = Math.max(9, fluffSize * 0.65);
 
