@@ -17,9 +17,7 @@
   --cursor-y: -9999px;
 }
 
-* {
-  cursor: none !important;
-}
+
 
 body {
   background-color: var(--color-cream);

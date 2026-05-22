@@ -15,10 +15,15 @@ export default function CursorCircle() {
     let opacity = 0;
     let active  = false;
 
+    let targetX = -9999;
+    let targetY = -9999;
+    let currentX = -9999;
+    let currentY = -9999;
+
     const onMove = (e: MouseEvent) => {
       active = true;
-      document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
+      targetX = e.clientX;
+      targetY = e.clientY;
     };
     const onLeave = () => { active = false; };
 
@@ -28,6 +33,19 @@ export default function CursorCircle() {
     const tick = () => {
       if (active) opacity = Math.min(1, opacity + 0.09);
       else        opacity = Math.max(0, opacity - 0.06);
+
+      if (targetX !== -9999 && targetY !== -9999) {
+        if (currentX === -9999 || currentY === -9999) {
+          currentX = targetX;
+          currentY = targetY;
+        } else {
+          // Easing/latency effect: 0.12 speed factor
+          currentX += (targetX - currentX) * 0.12;
+          currentY += (targetY - currentY) * 0.12;
+        }
+        document.documentElement.style.setProperty('--cursor-x', `${currentX}px`);
+        document.documentElement.style.setProperty('--cursor-y', `${currentY}px`);
+      }
 
       disc.style.opacity = String(opacity);
       raf = requestAnimationFrame(tick);
