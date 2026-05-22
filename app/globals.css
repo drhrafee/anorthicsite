@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f4e9d5;
+  --color-slate: #5a6b7c;
+  --color-cherry: #281819;
+  --color-crimson: #cb272c;
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-krona: var(--font-krona-one);
+  --font-geist: var(--font-geist);
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-cherry);
+}
+

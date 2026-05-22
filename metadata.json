@@ -1,0 +1,6 @@
+{
+  "name": "Anorthic Studio",
+  "description": "Landing page for Anorthic Studio showcasing AI workflow automation, web development, and branding services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
