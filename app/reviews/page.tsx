@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Reviews | Anorthic Studio',
+  description: 'Read reviews and client testimonials for Anorthic Studio, highlighting our commitment to quality, velocity, and high-performance execution.',
+};
+
 export default function ReviewsPage() {
   return (
     <div className="flex-1 relative flex flex-col justify-end">

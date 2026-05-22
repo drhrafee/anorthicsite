@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About | Anorthic Studio',
+  description: 'Learn about Anorthic Studio, our design principles, technical expertise, and how we build uncompromising digital products.',
+};
+
 export default function AboutPage() {
   return (
     <div className="flex-1 relative flex flex-col justify-end">

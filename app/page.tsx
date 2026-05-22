@@ -1,11 +1,4 @@
 import AnimatedCounter from '@/components/AnimatedCounter';
-import { Sacramento } from 'next/font/google';
-import NeuralParticles from '@/components/NeuralParticles';
-
-const sacramento = Sacramento({
-  weight: '400',
-  subsets: ['latin'],
-});
 
 export default function Page() {
   return (
@@ -43,10 +36,9 @@ export default function Page() {
       </section>
 
       <div className="relative w-screen h-screen -mx-[4vw] lg:-mx-[2vw] mt-[4vw] lg:mt-[2vw] shrink-0 flex items-center justify-center overflow-hidden">
-        <NeuralParticles />
-        <h2 className={`${sacramento.className} relative z-10 text-[7vw] md:text-[5vw] lg:text-[4vw] text-crimson text-center leading-none select-none tracking-tight whitespace-nowrap italic`}>
+        <span className="font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic select-none">
           no fluff, just hard work.
-        </h2>
+        </span>
       </div>
     </div>
   );
