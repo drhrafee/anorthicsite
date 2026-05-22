@@ -111,12 +111,20 @@ export default function WordCloud() {
         let trials = 0;
         const maxTrials = 150; // Increased trials to allow high-density packing of larger words
 
-        // Bounding box calculation for Bebas Neue
-        const charWidthFactor = 0.54; // Bebas is narrow, but we use a slightly larger factor to guarantee separation
+        // Bounding box calculation for Bebas Neue using a character-weighted width estimator
         const getWordDimensions = (wText: string, fSize: number) => {
+          let relativeWidth = 0;
+          for (let i = 0; i < wText.length; i++) {
+            const char = wText[i];
+            if (char === 'I') relativeWidth += 0.22;
+            else if (char === 'M' || char === 'W') relativeWidth += 0.62;
+            else if (char === ' ') relativeWidth += 0.28;
+            else relativeWidth += 0.46; // default average width for Bebas characters
+          }
+          const textW = relativeWidth * fSize;
           return {
-            w: wText.length * fSize * charWidthFactor + 16, // 16px safety padding
-            h: fSize * 1.15 + 14 // 14px safety padding for line height + vertical sway
+            w: textW + 18, // 18px horizontal safety padding (prevents overlap with max sway of 14px)
+            h: fSize * 0.88 + 15 // 15px vertical safety padding (prevents overlap with max sway of 14px)
           };
         };
 
