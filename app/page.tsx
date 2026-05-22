@@ -78,6 +78,19 @@ export default function Page() {
     };
   }, []);
 
+  useEffect(() => {
+    // Smooth scroll to hash anchor on page load/mount
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, []);
+
   return (
     <div className="flex-1 flex flex-col">
       <section className="w-screen h-screen -mx-[4vw] -mt-[4vw] lg:-mx-[2vw] lg:-mt-[2vw] px-[4vw] pb-[4vw] lg:px-[2vw] lg:pb-[2vw] relative flex flex-col justify-end shrink-0">
@@ -98,7 +111,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="flex flex-col shrink-0 w-full">
+      <section id="about-section" className="flex flex-col shrink-0 w-full">
         <div className="w-full bg-cherry text-cream rounded-[2rem] md:rounded-[3rem] p-6 md:p-8 lg:p-10 flex flex-col justify-start items-start shadow-xl mt-[4vw] lg:mt-[2vw]">
           <p className="m-0 font-geist text-[7vw] md:text-[5vw] lg:text-[4vw] leading-[1.1] md:leading-[1.1] text-cream font-medium w-full">
             We are an atelier of digital architects building uncompromising brand identities, custom web applications, and ai automated workflows.

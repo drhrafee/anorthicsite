@@ -8,10 +8,23 @@ export function NavBar() {
   const pathname = usePathname();
 
   const links = [
-    { name: 'About', path: '/about' },
+    { name: 'About', path: '/#about-section' },
     { name: 'Projects', path: '/projects' },
     { name: 'Reviews', path: '/reviews' },
   ];
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (path.startsWith('/#') && pathname === '/') {
+      e.preventDefault();
+      const id = path.substring(2); // remove '/#'
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update URL hash without causing a page jump
+        window.history.pushState(null, '', path);
+      }
+    }
+  };
 
   return (
     <header className="absolute top-0 left-0 w-full flex items-center justify-between z-50 pointer-events-none">
@@ -30,6 +43,7 @@ export function NavBar() {
           <Link
             key={link.name}
             href={link.path}
+            onClick={(e) => handleLinkClick(e, link.path)}
             aria-current={pathname === link.path ? 'page' : undefined}
             className={`hover:text-crimson transition-colors font-medium text-[2.4vw] md:text-[1.4vw] lg:text-[0.88vw] uppercase tracking-[0.1em] md:tracking-[0.15em] ${
               pathname === link.path ? 'text-crimson' : ''
