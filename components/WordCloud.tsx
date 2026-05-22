@@ -77,25 +77,25 @@ export default function WordCloud() {
       const shuffledWords = [...WORD_LIST].sort(() => Math.random() - 0.5);
 
       shuffledWords.forEach((wordText, index) => {
-        // Decide font family: 50% Bebas Neue, 50% Geist
-        const fontFamily = Math.random() > 0.5 ? 'bebas' as const : 'geist' as const;
-        const text = fontFamily === 'bebas' ? wordText.toUpperCase() : wordText;
+        // Decide font family: Bebas Neue only
+        const fontFamily = 'bebas' as const;
+        const text = wordText.toUpperCase();
 
         // Choose random font sizes based on distribution tiers (measured in % of container width, i.e., responsive units)
         let sizeVw = 1.4;
         const roll = Math.random();
         if (roll > 0.92) {
           // Large words - reduced slightly
-          sizeVw = fontFamily === 'bebas' ? 5.5 : 4.5;
+          sizeVw = 4.6;
         } else if (roll > 0.75) {
           // Medium-Large - reduced slightly
-          sizeVw = fontFamily === 'bebas' ? 4.2 : 3.5;
+          sizeVw = 3.6;
         } else if (roll > 0.45) {
           // Medium - reduced slightly
-          sizeVw = fontFamily === 'bebas' ? 3.4 : 2.8;
+          sizeVw = 2.8;
         } else {
           // Small/Details - reduced slightly
-          sizeVw = fontFamily === 'bebas' ? 2.4 : 1.8;
+          sizeVw = 2.0;
         }
 
         // Convert responsive width percentage to pixels
@@ -111,11 +111,16 @@ export default function WordCloud() {
         let trials = 0;
         const maxTrials = 150; // Increased trials to allow high-density packing of larger words
 
-        // Bounding box heuristic - reduced gaps significantly
-        // Bebas Neue is narrow (0.5 * fontSize), Geist is wider (0.65 * fontSize)
-        const charWidthFactor = fontFamily === 'bebas' ? 0.44 : 0.54;
-        let wordW = text.length * fontSize * charWidthFactor - 1; 
-        let wordH = fontSize * 0.96;
+        // Bounding box calculation for Bebas Neue
+        const charWidthFactor = 0.54; // Bebas is narrow, but we use a slightly larger factor to guarantee separation
+        const getWordDimensions = (wText: string, fSize: number) => {
+          return {
+            w: wText.length * fSize * charWidthFactor + 16, // 16px safety padding
+            h: fSize * 1.15 + 14 // 14px safety padding for line height + vertical sway
+          };
+        };
+
+        let { w: wordW, h: wordH } = getWordDimensions(text, fontSize);
 
         while (!placed && trials < maxTrials) {
           // Generate a candidate position
@@ -185,8 +190,9 @@ export default function WordCloud() {
             if (trials === 75) {
               fontSize = Math.max(absoluteMin, fontSize * 0.7);
               sizeVw = sizeVw * 0.7; // Also shrink the relative size so style matches
-              wordW = text.length * fontSize * charWidthFactor - 1;
-              wordH = fontSize * 0.96;
+              const dims = getWordDimensions(text, fontSize);
+              wordW = dims.w;
+              wordH = dims.h;
             }
           }
         }
