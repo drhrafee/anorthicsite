@@ -31,7 +31,7 @@ export default function StarryParticles() {
     canvas.width = width;
     canvas.height = height;
 
-    const STAR_COUNT = 130;
+    const STAR_COUNT = 170;
     let stars: Star[] = [];
 
     const createStar = (x?: number, y?: number): Star => {
@@ -42,11 +42,11 @@ export default function StarryParticles() {
         vx: (Math.random() - 0.5) * 0.25,
         vy: (Math.random() - 0.5) * 0.25,
         // Smaller particle sizes for a neat "node" look (0.8px to 2px)
-        radius: 0.8 + Math.random() * 1.2,
+        radius: 1.3 + Math.random() * 1.1,
         // Soft opacity range
         baseAlpha: 0.25 + Math.random() * 0.4,
         alphaPhase: Math.random() * Math.PI * 2,
-        alphaSpeed: 0.01 + Math.random() * 0.02,
+        alphaSpeed: 0.2 + Math.random() * 0.02,
       };
     };
 
@@ -90,7 +90,7 @@ export default function StarryParticles() {
       }
 
       // Draw connection lines (Neurolink network)
-      const maxDistance = 90;
+      const maxDistance = 110;
       for (let i = 0; i < stars.length; i++) {
         const s1 = stars[i];
         for (let j = i + 1; j < stars.length; j++) {
@@ -101,12 +101,12 @@ export default function StarryParticles() {
 
           if (dist < maxDistance) {
             // Opacity fades out to 0 as distance reaches maxDistance
-            const lineAlpha = (1 - dist / maxDistance) * 0.18;
+            const lineAlpha = (1 - dist / maxDistance) * 0.24;
             ctx.beginPath();
             ctx.moveTo(s1.x, s1.y);
             ctx.lineTo(s2.x, s2.y);
             ctx.strokeStyle = `rgba(203, 39, 44, ${lineAlpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
