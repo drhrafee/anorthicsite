@@ -1,4 +1,5 @@
 import AnimatedCounter from '@/components/AnimatedCounter';
+import StarryParticles from '@/components/StarryParticles';
 
 export default function Page() {
   return (
@@ -36,7 +37,8 @@ export default function Page() {
       </section>
 
       <div className="relative w-screen h-screen -mx-[4vw] lg:-mx-[2vw] mt-[4vw] lg:mt-[2vw] shrink-0 flex items-center justify-center overflow-hidden">
-        <span className="font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic select-none">
+        <StarryParticles />
+        <span className="relative z-10 font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic select-none">
           no fluff, just hard work.
         </span>
       </div>
