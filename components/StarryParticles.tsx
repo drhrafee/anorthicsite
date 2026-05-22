@@ -31,7 +31,7 @@ export default function StarryParticles() {
     canvas.width = width;
     canvas.height = height;
 
-    const STAR_COUNT = 200;
+    const STAR_COUNT = 130;
     let stars: Star[] = [];
 
     const createStar = (x?: number, y?: number): Star => {
@@ -41,10 +41,10 @@ export default function StarryParticles() {
         // Extremely slow drift
         vx: (Math.random() - 0.5) * 0.25,
         vy: (Math.random() - 0.5) * 0.25,
-        // High visibility size range: 1.2px to 4px
-        radius: 1.2 + Math.random() * 2.8,
-        // High visibility base opacity range: 0.35 to 0.75
-        baseAlpha: 0.35 + Math.random() * 0.4,
+        // Smaller particle sizes for a neat "node" look (0.8px to 2px)
+        radius: 0.8 + Math.random() * 1.2,
+        // Soft opacity range
+        baseAlpha: 0.25 + Math.random() * 0.4,
         alphaPhase: Math.random() * Math.PI * 2,
         alphaSpeed: 0.01 + Math.random() * 0.02,
       };
@@ -78,23 +78,46 @@ export default function StarryParticles() {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
+      // Move stars & wrap boundaries
       for (const s of stars) {
-        // Move stars
         s.x += s.vx;
         s.y += s.vy;
 
-        // Wrap around boundaries
         if (s.x < -10) s.x = width + 10;
         if (s.x > width + 10) s.x = -10;
         if (s.y < -10) s.y = height + 10;
         if (s.y > height + 10) s.y = -10;
+      }
 
-        // Twinkle (oscillate opacity phase)
+      // Draw connection lines (Neurolink network)
+      const maxDistance = 90;
+      for (let i = 0; i < stars.length; i++) {
+        const s1 = stars[i];
+        for (let j = i + 1; j < stars.length; j++) {
+          const s2 = stars[j];
+          const dx = s1.x - s2.x;
+          const dy = s1.y - s2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            // Opacity fades out to 0 as distance reaches maxDistance
+            const lineAlpha = (1 - dist / maxDistance) * 0.18;
+            ctx.beginPath();
+            ctx.moveTo(s1.x, s1.y);
+            ctx.lineTo(s2.x, s2.y);
+            ctx.strokeStyle = `rgba(203, 39, 44, ${lineAlpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particle nodes
+      for (const s of stars) {
         s.alphaPhase += s.alphaSpeed;
         const currentAlpha = s.baseAlpha + Math.sin(s.alphaPhase) * 0.15;
-        const alpha = Math.max(0.15, Math.min(0.95, currentAlpha));
+        const alpha = Math.max(0.1, Math.min(0.85, currentAlpha));
 
-        // Draw star in crimson
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(203, 39, 44, ${alpha})`;
