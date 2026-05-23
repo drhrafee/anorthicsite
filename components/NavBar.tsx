@@ -1,16 +1,27 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export function NavBar() {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const links = [
     { name: 'About', path: '/#about-section' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Reviews', path: '/reviews' },
+    { name: 'Projects', path: '/#projects-section' },
+    { name: 'Reviews', path: '/#reviews-section' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
@@ -27,7 +38,13 @@ export function NavBar() {
   };
 
   return (
-    <header className="absolute top-0 left-0 w-full flex items-center justify-between z-50 pointer-events-none">
+    <header
+      className={`fixed top-0 left-0 w-full flex items-center justify-between z-50 pointer-events-none transition-all duration-300 px-[4vw] lg:px-[2vw] ${
+        scrolled
+          ? 'py-3 md:py-4 bg-cream/80 backdrop-blur-md shadow-[0_1px_10px_rgba(40,24,25,0.03)] border-b border-cherry/5'
+          : 'pt-[4vw] lg:pt-[2vw] pb-4 bg-transparent'
+      }`}
+    >
       <Link href="/" className="pointer-events-auto" aria-label="Anorthic Studio Home">
         <Image 
           src="/logo.svg" 
@@ -38,7 +55,7 @@ export function NavBar() {
           priority 
         />
       </Link>
-      <nav className="flex items-center gap-2.5 md:gap-4 font-sans text-cherry pointer-events-auto" aria-label="Main Navigation">
+      <nav className="flex items-center gap-4 md:gap-6 lg:gap-8 font-sans text-cherry pointer-events-auto" aria-label="Main Navigation">
         {links.map((link) => (
           <Link
             key={link.name}

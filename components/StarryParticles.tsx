@@ -31,16 +31,15 @@ export default function StarryParticles() {
     canvas.width = width;
     canvas.height = height;
 
-    const STAR_COUNT = 170;
     let stars: Star[] = [];
 
     const createStar = (x?: number, y?: number): Star => {
       return {
         x: x ?? Math.random() * width,
         y: y ?? Math.random() * height,
-        // Extremely slow drift
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
+        // Gentle drift
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
         // Smaller particle sizes for a neat "node" look (0.8px to 2px)
         radius: 1.3 + Math.random() * 1.1,
         // Soft opacity range
@@ -51,8 +50,14 @@ export default function StarryParticles() {
     };
 
     const init = () => {
+      const area = width * height;
+      const isMobile = width < 768;
+      const divisor = isMobile ? 18000 : 12000;
+      const minStars = isMobile ? 15 : 40;
+      const maxStars = isMobile ? 40 : 170;
+      const starCount = Math.max(minStars, Math.min(maxStars, Math.floor(area / divisor)));
       stars = [];
-      for (let i = 0; i < STAR_COUNT; i++) {
+      for (let i = 0; i < starCount; i++) {
         stars.push(createStar());
       }
     };
@@ -90,7 +95,7 @@ export default function StarryParticles() {
       }
 
       // Draw connection lines (Neurolink network)
-      const maxDistance = 110;
+      const maxDistance = width < 768 ? 80 : 110;
       for (let i = 0; i < stars.length; i++) {
         const s1 = stars[i];
         for (let j = i + 1; j < stars.length; j++) {

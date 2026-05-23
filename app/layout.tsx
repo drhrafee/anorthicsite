@@ -3,6 +3,7 @@ import { Krona_One, Geist, Sacramento, Syne, Barlow_Condensed, Bebas_Neue } from
 import './globals.css';
 import { NavBar } from '@/components/NavBar';
 import CursorCircle from '@/components/CursorCircle';
+import PageLoader from '@/components/PageLoader';
 
 const kronaOne = Krona_One({
   weight: '400',
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${kronaOne.variable} ${geist.variable} ${sacramento.variable} ${syne.variable} ${barlowCondensed.variable} ${bebasNeue.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning className="antialiased min-h-screen bg-cream text-cherry selection:bg-crimson selection:text-cream flex justify-center relative overflow-x-hidden">
+        <PageLoader />
         <CursorCircle />
         <div
           className="fixed inset-0 z-0 pointer-events-none opacity-[0.04] mix-blend-color-burn"

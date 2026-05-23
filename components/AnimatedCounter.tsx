@@ -90,7 +90,7 @@ export default function AnimatedCounter({ target, suffix = '', label, duration =
           {count}
           <span className="text-crimson font-light ml-0.5">{suffix}</span>
         </span>
-        <span className="font-geist text-[2.2vw] md:text-sm lg:text-base font-bold text-cherry/80 uppercase tracking-[0.05em] md:tracking-wider mt-2 md:mt-4">
+        <span className="font-geist text-[2.3vw] md:text-[2.0vw] lg:text-[1.65vw] font-bold text-cherry/80 uppercase tracking-[0.05em] md:tracking-wider mt-2 md:mt-4">
           {label}
         </span>
       </div>
