@@ -32,6 +32,7 @@ export default function StarryParticles() {
     canvas.height = height;
 
     let stars: Star[] = [];
+    let isVisible = false;
 
     const createStar = (x?: number, y?: number): Star => {
       return {
@@ -81,6 +82,8 @@ export default function StarryParticles() {
 
     // Animation Loop
     const animate = () => {
+      if (!isVisible) return;
+
       ctx.clearRect(0, 0, width, height);
 
       // Move stars & wrap boundaries
@@ -131,10 +134,23 @@ export default function StarryParticles() {
 
       animationFrameId = requestAnimationFrame(animate);
     };
-    animate();
+
+    // IntersectionObserver to pause off-screen canvas loops
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    }, {
+      rootMargin: '100px', // start generating slightly before entering viewport
+    });
+    intersectionObserver.observe(container);
 
     return () => {
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

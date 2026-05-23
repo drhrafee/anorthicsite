@@ -73,8 +73,13 @@ export default function WordCloud() {
       const placedBoxes: Box[] = [exclusionBox];
       const newPlacedWords: PositionedWord[] = [];
 
-      // Sort words randomly to get a unique spread each time
-      const shuffledWords = [...WORD_LIST].sort(() => Math.random() - 0.5);
+      // Sort words randomly to get a unique spread each time, sizing down for performance
+      let shuffledWords = [...WORD_LIST].sort(() => Math.random() - 0.5);
+      if (isMobile) {
+        shuffledWords = shuffledWords.slice(0, 65);
+      } else {
+        shuffledWords = shuffledWords.slice(0, 140);
+      }
 
       shuffledWords.forEach((wordText, index) => {
         // Decide font family: Bebas Neue only

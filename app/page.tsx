@@ -141,71 +141,12 @@ const ROWS: RowData[] = [
   },
 ];
 
-type PillPos = { top?: string; bottom?: string; left?: string; right?: string };
 
-const ALL_PILL_POSITIONS: PillPos[][] = [
-  [
-    { top: '10%', left: '-15%' },
-    { top: '25%', right: '-12%' },
-    { top: '40%', left: '-10%' },
-    { top: '65%', right: '-14%' },
-    { top: '75%', left: '-16%' },
-  ],
-  [
-    { top: '50%', left: '-12%' },
-    { top: '15%', right: '-14%' },
-    { top: '45%', right: '-10%' },
-    { top: '75%', right: '-16%' },
-    { top: '-8%', left: '30%' },
-  ],
-  [
-    { top: '-7%', left: '10%' },
-    { top: '-9%', right: '15%' },
-    { top: '55%', left: '-12%' },
-    { bottom: '-8%', left: '20%' },
-    { bottom: '-6%', right: '25%' },
-  ],
-  [
-    { bottom: '-8%', right: '35%' },
-    { top: '20%', left: '-15%' },
-    { top: '65%', left: '-10%' },
-    { top: '10%', right: '-12%' },
-    { top: '60%', right: '-14%' },
-  ],
-  [
-    { top: '20%', right: '-10%' },
-    { top: '70%', right: '-16%' },
-    { bottom: '-7%', left: '15%' },
-    { bottom: '-9%', right: '20%' },
-    { top: '45%', left: '-14%' },
-  ],
-  [
-    { top: '-8%', left: '20%' },
-    { top: '-6%', right: '10%' },
-    { top: '30%', left: '-12%' },
-    { top: '70%', left: '-14%' },
-    { top: '50%', right: '-15%' },
-  ],
-  [
-    { top: '-8%', right: '25%' },
-    { top: '25%', left: '-12%' },
-    { top: '35%', right: '-14%' },
-    { top: '70%', right: '-10%' },
-    { bottom: '-8%', left: '35%' },
-  ],
-  [
-    { top: '15%', left: '-10%' },
-    { top: '55%', left: '-15%' },
-    { top: '30%', right: '-12%' },
-    { bottom: '-6%', left: '25%' },
-    { bottom: '-8%', right: '15%' },
-  ],
-];
 
-function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: PillPos[] }) {
+function ProjectCard({ card }: { card: CardData }) {
   return (
     <div
-      className="project-card relative overflow-hidden rounded-[clamp(16px,2.2vw,48px)] h-[clamp(400px,60vh,650px)] lg:h-[calc(100vh-var(--nav-height,96px)-4vw)] flex flex-col justify-evenly items-center px-[clamp(16px,2.2vw,40px)]"
+      className="project-card relative overflow-hidden rounded-[2rem] md:rounded-[3rem] h-[clamp(400px,60vh,650px)] lg:h-[calc(100vh-var(--nav-height,96px)-4vw)] flex flex-col justify-evenly items-center px-[clamp(16px,2.2vw,40px)]"
       style={{ backgroundColor: card.bg }}
     >
       {/* Heading - centered in Geist */}
@@ -244,11 +185,11 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
         </h2>
       </div>
 
-      {/* Centered Image Container (allows pills to overflow) */}
+      {/* Centered Image Container */}
       {card.image ? (
         <div className="relative w-[80%] aspect-[3/2]">
           {/* Rounded, overflow-hidden wrapper for image and its border */}
-          <div className="absolute inset-0 rounded-[clamp(12px,1.6vw,32px)] overflow-hidden shadow-2xl border border-white/5">
+          <div className="absolute inset-0 rounded-[1rem] md:rounded-[2rem] overflow-hidden shadow-2xl border border-white/5">
             <Image
               src={card.image}
               fill
@@ -257,41 +198,12 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
               sizes="(max-width: 1024px) 80vw, 40vw"
             />
           </div>
-
-          {/* Pill tags absolute-positioned relative to this image container */}
-          {card.pills.map((pill, i) => (
-            <span
-              key={pill}
-              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5 text-[9px] min-[400px]:text-[10px] md:text-xs lg:text-[13px] xl:text-[15px] py-1 px-2.5 min-[400px]:py-1.5 min-[400px]:px-3 md:py-2 md:px-4 lg:py-2.5 lg:px-5"
-              style={{
-                backgroundColor: '#ffffff',
-                color: '#281819',
-                ...pillPositions[i],
-              }}
-            >
-              {pill}
-            </span>
-          ))}
         </div>
       ) : (
         <div
           className="relative pointer-events-none select-none w-[42%] aspect-square opacity-10"
         >
           <Image src="/logo.svg" fill className="object-contain" alt="" />
-          {/* Pill tags relative to fallback logo container */}
-          {card.pills.map((pill, i) => (
-            <span
-              key={pill}
-              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5 text-[9px] min-[400px]:text-[10px] md:text-xs lg:text-[13px] xl:text-[15px] py-1 px-2.5 min-[400px]:py-1.5 min-[400px]:px-3 md:py-2 md:px-4 lg:py-2.5 lg:px-5"
-              style={{
-                backgroundColor: '#ffffff',
-                color: '#281819',
-                ...pillPositions[i],
-              }}
-            >
-              {pill}
-            </span>
-          ))}
         </div>
       )}
     </div>
@@ -627,60 +539,104 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── Spotlight / word-cloud section (unchanged) ────────────────────── */}
-      <div
-        ref={sectionRef}
-        className="sticky top-0 w-screen h-screen -mx-[4vw] lg:-mx-[2vw] shrink-0 flex items-center justify-center overflow-hidden z-0"
-      >
-        {/* Base layer */}
-        <div className="absolute inset-0 w-full h-full z-0 bg-cream pointer-events-none select-none">
-          <StarryParticles />
-        </div>
-
-        <span className="relative z-10 font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic select-none">
-          no fluff, just hard work.
-        </span>
-
-        {/* Cursor-reveal overlay */}
+      {/* ── Spotlight + Projects container (limits sticky scope so spotlight scrolls away after projects/cards) ── */}
+      <div className="relative w-full">
+        {/* ── Spotlight / word-cloud section (unchanged) ────────────────────── */}
         <div
-          ref={overlayRef}
-          className="absolute inset-0 w-full h-full z-20 bg-cream flex items-center justify-center select-none opacity-0"
-          style={{ transform: 'translate3d(0,0,0)', willChange: 'clip-path, opacity' }}
+          ref={sectionRef}
+          className="sticky top-0 w-screen h-screen -mx-[4vw] lg:-mx-[2vw] shrink-0 flex items-center justify-center overflow-hidden z-0"
         >
-          <WordCloud />
-          <span className="relative z-10 font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic">
+          {/* Base layer */}
+          <div className="absolute inset-0 w-full h-full z-0 bg-cream pointer-events-none select-none">
+            <StarryParticles />
+          </div>
+
+          <span className="relative z-10 font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic select-none">
             no fluff, just hard work.
           </span>
-        </div>
-      </div>
 
-      {/* ── Projects section ──────────────────────────────────────────── */}
-      <div id="projects-section" className="relative z-10 w-full mt-[4vw] lg:mt-[2vw] shrink-0 scroll-mt-[var(--nav-height,78px)] lg:scroll-mt-[var(--nav-height,96px)]">
-
-
-        {/* Cards */}
-        <div className="relative z-10 w-full pb-[4vw] lg:pb-[2vw]">
-          <div className="flex flex-col gap-[4vw] lg:gap-[2vw]">
-            {ROWS.map((row, rowIdx) => (
-              <div key={row.label}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-[4vw] lg:gap-[2vw]">
-                  {row.cards.map((card, cardIdx) => {
-                    const globalIdx = rowIdx * 2 + cardIdx;
-                    return (
-                      <ProjectCard
-                        key={card.title}
-                        card={card}
-                        pillPositions={ALL_PILL_POSITIONS[globalIdx]}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
+          {/* Cursor-reveal overlay */}
+          <div
+            ref={overlayRef}
+            className="absolute inset-0 w-full h-full z-20 bg-cream flex items-center justify-center select-none opacity-0"
+            style={{ transform: 'translate3d(0,0,0)', willChange: 'clip-path, opacity' }}
+          >
+            <WordCloud />
+            <span className="relative z-10 font-sacramento text-crimson text-[7vw] md:text-[5vw] lg:text-[4vw] italic">
+              no fluff, just hard work.
+            </span>
           </div>
         </div>
 
+        {/* ── Services section ──────────────────────────────────────────── */}
+        <div id="services-section" className="relative z-10 w-full mt-[4vw] lg:mt-[2vw] shrink-0 scroll-mt-[var(--nav-height,78px)] lg:scroll-mt-[var(--nav-height,96px)]">
+
+
+          {/* Cards */}
+          <div className="relative z-10 w-full pb-0">
+            <div className="flex flex-col gap-[4vw] lg:gap-[2vw]">
+              {ROWS.map((row, rowIdx) => (
+                <div key={row.label}>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-[4vw] lg:gap-[2vw]">
+                    {row.cards.map((card, cardIdx) => {
+                      return (
+                        <ProjectCard
+                          key={card.title}
+                          card={card}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      {/* ── Projects section ──────────────────────────────────────────────── */}
+      <section id="projects-section" className="flex flex-col shrink-0 w-full h-[calc(100vh-var(--nav-height,78px)-4vw)] lg:h-[calc(100vh-var(--nav-height,96px)-2vw)] scroll-mt-[var(--nav-height,78px)] lg:scroll-mt-[var(--nav-height,96px)] pt-[4vw] lg:pt-[2vw] pb-0">
+        <div className="w-full h-full bg-crimson text-cream rounded-[2rem] md:rounded-[3rem] p-6 md:p-8 lg:p-10 flex flex-col justify-start items-start shadow-xl">
+          <h2 className="font-krona text-[6vw] md:text-[4vw] lg:text-[3vw] leading-[1.1] text-cream font-normal mb-8 uppercase">
+            Selected Projects
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full flex-1">
+            <div className="flex flex-col justify-between h-full border-t border-cream/20 pt-6">
+              <div>
+                <span className="font-geist text-xs text-cream/70 uppercase tracking-widest">01 / E-Commerce</span>
+                <h3 className="font-krona text-lg md:text-xl text-cream uppercase mt-2">Velo Platform</h3>
+                <p className="font-geist text-sm md:text-base text-cream/80 leading-relaxed mt-4">
+                  A high-performance storefront with optimized checkout pipelines, real-time inventory synchronization, and custom checkout flows.
+                </p>
+              </div>
+              <div className="mt-6 flex gap-4 text-xs font-geist uppercase tracking-wider text-cream/70">
+                <span>Next.js</span>
+                <span>•</span>
+                <span>Tailwind CSS</span>
+                <span>•</span>
+                <span>2026</span>
+              </div>
+            </div>
+            <div className="flex flex-col justify-between h-full border-t border-cream/20 pt-6">
+              <div>
+                <span className="font-geist text-xs text-cream/70 uppercase tracking-widest">02 / Identity & CMS</span>
+                <h3 className="font-krona text-lg md:text-xl text-cream uppercase mt-2">Atelier Studio</h3>
+                <p className="font-geist text-sm md:text-base text-cream/80 leading-relaxed mt-4">
+                  Bespoke digital architecture for a premier design firm, combining custom CMS integration with a minimalist style manual.
+                </p>
+              </div>
+              <div className="mt-6 flex gap-4 text-xs font-geist uppercase tracking-wider text-cream/70">
+                <span>React</span>
+                <span>•</span>
+                <span>Figma</span>
+                <span>•</span>
+                <span>2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
   );

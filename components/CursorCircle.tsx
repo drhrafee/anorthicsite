@@ -29,25 +29,20 @@ export default function CursorCircle() {
     let currentX = -9999;
     let currentY = -9999;
 
-    const updateHover = (x: number, y: number) => {
-      if (x === -9999 || y === -9999) return;
-      const el = document.elementFromPoint(x, y);
-      setIsHoveringCard(!!el?.closest('.project-card'));
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      setIsHoveringCard(!!target?.closest('.project-card'));
     };
 
     const onMove = (e: MouseEvent) => {
       active = true;
       targetX = e.clientX;
       targetY = e.clientY;
-      updateHover(targetX, targetY);
     };
     const onLeave = () => { active = false; };
-    const onScroll = () => {
-      updateHover(targetX, targetY);
-    };
 
     window.addEventListener('mousemove', onMove);
-    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('mouseover', onMouseOver);
     document.addEventListener('mouseleave', onLeave);
 
     const tick = () => {
@@ -74,7 +69,7 @@ export default function CursorCircle() {
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseleave', onLeave);
       cancelAnimationFrame(raf);
     };

@@ -20,8 +20,8 @@ export function NavBar() {
 
   const links = [
     { name: 'About', path: '/#about-section' },
+    { name: 'Services', path: '/#services-section' },
     { name: 'Projects', path: '/#projects-section' },
-    { name: 'Reviews', path: '/#reviews-section' },
   ];
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {

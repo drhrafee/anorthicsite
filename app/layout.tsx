@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Krona_One, Geist, Sacramento, Syne, Barlow_Condensed, Bebas_Neue } from 'next/font/google';
+import { Krona_One, Geist, Sacramento, Bebas_Neue } from 'next/font/google';
 import './globals.css';
 import { NavBar } from '@/components/NavBar';
 import CursorCircle from '@/components/CursorCircle';
@@ -22,18 +22,6 @@ const sacramento = Sacramento({
   variable: '--font-sacramento',
 });
 
-const syne = Syne({
-  weight: ['800'],
-  subsets: ['latin'],
-  variable: '--font-syne',
-});
-
-const barlowCondensed = Barlow_Condensed({
-  weight: ['700', '900'],
-  subsets: ['latin'],
-  variable: '--font-barlow-condensed',
-});
-
 const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
@@ -52,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${kronaOne.variable} ${geist.variable} ${sacramento.variable} ${syne.variable} ${barlowCondensed.variable} ${bebasNeue.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${kronaOne.variable} ${geist.variable} ${sacramento.variable} ${bebasNeue.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning className="antialiased min-h-screen bg-cream text-cherry selection:bg-crimson selection:text-cream flex justify-center relative overflow-x-hidden">
         <PageLoader />
         <CursorCircle />
