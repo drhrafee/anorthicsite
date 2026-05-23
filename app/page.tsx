@@ -35,14 +35,14 @@ const ROWS: RowData[] = [
     label: 'Elite Web Engineering',
     cards: [
       {
-        title: 'Pure-Coded Web Architecture',
-        heading: ['Pure-Coded', 'Web Architecture'],
+        title: 'Bespoke Web Architecture',
+        heading: ['Bespoke', 'Web Architecture'],
         bg: '#281819',
         text: '#f4e9d5',
         pillBg: '#f4e9d5',
         pillText: '#281819',
         image: '/card1.jpg',
-        pills: ['Tailor-Made Web Applications', 'Clean, Scalable Codebases', 'API & Database Integration'],
+        pills: ['Pure-Coded Web Apps', 'Scalable Architectures', 'Custom Web Engineering', 'API Integrations', 'Secure Databases'],
         highlightWord: 'Pure-Coded',
       },
       {
@@ -53,7 +53,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#5a6b7c',
         image: '/card2.jpg',
-        pills: ['Premium Landing Pages', 'High-End Agency Portfolios', 'Interactive Personal Sites'],
+        pills: ['High-Performance Landing Pages', 'Premium Agency Portfolios', 'Interactive Personal Sites', 'Business Showcase Portals', 'Conversion-Driven UI'],
         highlightWord: 'High-End',
       },
     ],
@@ -69,7 +69,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#cb272c',
         image: '/card3.jpg',
-        pills: ['Custom Digital Storefronts', 'Secure Payment Gateways', 'Optimized Checkout Flows'],
+        pills: ['Custom Digital Storefronts', 'Secure Payment Gateways', 'Optimized Checkout Flows', 'Inventory System Integration', 'B2B/B2C Marketplaces'],
         highlightWord: 'Next-Gen',
       },
       {
@@ -80,7 +80,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#281819',
         image: '/card4.jpg',
-        pills: ['Custom Theme Architecture', 'High-Traffic Blogs & Magazines', 'Speed & SEO Optimization'],
+        pills: ['Custom Theme Development', 'Dynamic Blogs & Magazines', 'High-Traffic Content Architectures', 'Core Web Vitals Optimization', 'Custom WordPress Plugins'],
         highlightWord: 'Custom-Tailored',
       },
     ],
@@ -96,7 +96,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#5a6b7c',
         image: '/card5.jpg',
-        pills: ['Minimalist & Iconic Logos', 'High-Tech / Modern Styling', 'Vector Assets & Iconography'],
+        pills: ['Minimalist & Iconic Logos', 'High-Tech Corporate Visuals', 'Vector Assets & SVG Formats', 'Custom Geometric Typography', 'Structural Symbol Design'],
         highlightWord: 'Identity',
       },
       {
@@ -107,7 +107,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#cb272c',
         image: '/card6.jpg',
-        pills: ['Comprehensive Style Guides', 'Typography & Grid Systems', 'Cohesive Brand Palettes'],
+        pills: ['Comprehensive Style Manuals', 'Brand Layout & Grid Systems', 'Cohesive Identity Playbooks', 'Typography Rules', 'Uniform Asset Frameworks'],
         highlightWord: 'Systems',
       },
     ],
@@ -123,7 +123,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#281819',
         image: '/card7.jpg',
-        pills: ['Custom Conversational Bots', 'Autonomous Task Agents', 'Context-Aware Customer Support'],
+        pills: ['Autonomous AI Agents', 'Context-Aware Support Systems', 'Custom Conversational Bots', 'Intelligent Natural Language Routing', '24/7 Automated Triaging'],
         highlightWord: 'Autonomous',
       },
       {
@@ -134,7 +134,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#5a6b7c',
         image: '/card8.jpg',
-        pills: ['Automated Email & Lead Funnels', 'E-commerce Operations Automation', 'Multi-Platform Social Syncing'],
+        pills: ['Automated Email Funnels', 'Intelligent Lead Gen Pipelines', 'E-commerce Operations Automation', 'Cross-Platform Social Syncing', 'Frictionless Internal Workflows'],
         highlightWord: 'Workflow',
       },
     ],
@@ -144,14 +144,62 @@ const ROWS: RowData[] = [
 type PillPos = { top?: string; bottom?: string; left?: string; right?: string };
 
 const ALL_PILL_POSITIONS: PillPos[][] = [
-  [{ top: '42%', left: '11%' }, { top: '42%', right: '11%' }, { bottom: '11%', right: '15%' }],
-  [{ top: '43%', right: '11%' }, { bottom: '11%', left: '15%' }, { top: '55%', left: '11%' }],
-  [{ top: '40%', left: '11%' }, { top: '62%', right: '11%' }, { bottom: '11%', right: '15%' }],
-  [{ top: '42%', right: '11%' }, { top: '58%', left: '11%' }, { bottom: '11%', right: '15%' }],
-  [{ top: '39%', left: '11%' }, { top: '44%', right: '11%' }, { bottom: '11%', right: '15%' }],
-  [{ top: '41%', right: '11%' }, { top: '60%', left: '11%' }, { bottom: '11%', right: '15%' }],
-  [{ top: '43%', left: '11%' }, { top: '38%', right: '11%' }, { bottom: '11%', right: '15%' }],
-  [{ top: '42%', right: '11%' }, { top: '60%', right: '11%' }, { bottom: '11%', right: '15%' }],
+  [
+    { top: '25%', left: '6%' },
+    { top: '32%', right: '6%' },
+    { top: '52%', left: '8%' },
+    { top: '58%', right: '8%' },
+    { bottom: '8%', left: '12%' },
+  ],
+  [
+    { top: '32%', left: '6%' },
+    { top: '25%', right: '6%' },
+    { top: '58%', left: '8%' },
+    { top: '52%', right: '8%' },
+    { bottom: '8%', right: '12%' },
+  ],
+  [
+    { top: '24%', left: '8%' },
+    { top: '28%', right: '6%' },
+    { top: '50%', left: '6%' },
+    { top: '56%', right: '8%' },
+    { bottom: '8%', left: '16%' },
+  ],
+  [
+    { top: '28%', left: '6%' },
+    { top: '24%', right: '8%' },
+    { top: '56%', left: '8%' },
+    { top: '50%', right: '6%' },
+    { bottom: '8%', right: '16%' },
+  ],
+  [
+    { top: '26%', left: '5%' },
+    { top: '30%', right: '7%' },
+    { top: '53%', left: '9%' },
+    { top: '59%', right: '5%' },
+    { bottom: '8%', left: '14%' },
+  ],
+  [
+    { top: '30%', left: '7%' },
+    { top: '26%', right: '5%' },
+    { top: '59%', left: '5%' },
+    { top: '53%', right: '9%' },
+    { bottom: '8%', right: '14%' },
+  ],
+  [
+    { top: '25%', left: '9%' },
+    { top: '29%', right: '5%' },
+    { top: '51%', left: '7%' },
+    { top: '57%', right: '9%' },
+    { bottom: '8%', left: '15%' },
+  ],
+  [
+    { top: '29%', left: '5%' },
+    { top: '25%', right: '9%' },
+    { top: '57%', left: '9%' },
+    { top: '51%', right: '7%' },
+    { bottom: '8%', right: '15%' },
+  ],
 ];
 
 function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: PillPos[] }) {
@@ -219,7 +267,7 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
       {card.pills.map((pill, i) => (
         <span
           key={pill}
-          className="absolute z-20 font-geist font-semibold rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
+          className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
           style={{
             backgroundColor: '#ffffff',
             color: '#281819',
