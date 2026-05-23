@@ -134,7 +134,7 @@ const ROWS: RowData[] = [
         pillBg: '#f4e9d5',
         pillText: '#5a6b7c',
         image: '/card8.jpg',
-        pills: ['Automated Email Funnels', 'Intelligent Lead Gen Pipelines', 'E-commerce Operations Automation', 'Cross-Platform Social Syncing', 'Frictionless Internal Workflows'],
+        pills: ['Connecting Different Apps', 'Automated Work Replies', 'Smart Task Handlers', 'Instant Data Syncing', 'Visual Workflow Setup'],
         highlightWord: 'Workflow',
       },
     ],
@@ -205,7 +205,7 @@ const ALL_PILL_POSITIONS: PillPos[][] = [
 function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: PillPos[] }) {
   return (
     <div
-      className="project-card relative overflow-hidden rounded-[clamp(16px,2.2vw,48px)] h-[calc(100vh-var(--nav-height,78px)-8vw)] lg:h-[calc(100vh-var(--nav-height,96px)-4vw)] flex flex-col justify-evenly items-center px-[clamp(16px,2.2vw,40px)]"
+      className="project-card relative overflow-hidden rounded-[clamp(16px,2.2vw,48px)] h-[clamp(400px,60vh,650px)] lg:h-[calc(100vh-var(--nav-height,96px)-4vw)] flex flex-col justify-evenly items-center px-[clamp(16px,2.2vw,40px)]"
       style={{ backgroundColor: card.bg }}
     >
       {/* Heading - centered in Geist */}
@@ -246,15 +246,15 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
 
       {/* Centered Image Container (allows pills to overflow) */}
       {card.image ? (
-        <div className="relative w-[70%] h-[48%]">
+        <div className="relative w-[80%] aspect-[3/2]">
           {/* Rounded, overflow-hidden wrapper for image and its border */}
           <div className="absolute inset-0 rounded-[clamp(12px,1.6vw,32px)] overflow-hidden shadow-2xl border border-white/5">
             <Image
               src={card.image}
               fill
-              className="object-cover"
+              className="object-contain"
               alt={card.title}
-              sizes="(max-width: 768px) 70vw, 35vw"
+              sizes="(max-width: 1024px) 80vw, 40vw"
             />
           </div>
 
@@ -262,12 +262,10 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
           {card.pills.map((pill, i) => (
             <span
               key={pill}
-              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
+              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5 text-[9px] min-[400px]:text-[10px] md:text-xs lg:text-[13px] xl:text-[15px] py-1 px-2.5 min-[400px]:py-1.5 min-[400px]:px-3 md:py-2 md:px-4 lg:py-2.5 lg:px-5"
               style={{
                 backgroundColor: '#ffffff',
                 color: '#281819',
-                padding: 'clamp(8px, 0.6vw, 12px) clamp(14px, 1.4vw, 24px)',
-                fontSize: 'clamp(10px, 0.9vw, 16px)',
                 ...pillPositions[i],
               }}
             >
@@ -284,12 +282,10 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
           {card.pills.map((pill, i) => (
             <span
               key={pill}
-              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
+              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5 text-[9px] min-[400px]:text-[10px] md:text-xs lg:text-[13px] xl:text-[15px] py-1 px-2.5 min-[400px]:py-1.5 min-[400px]:px-3 md:py-2 md:px-4 lg:py-2.5 lg:px-5"
               style={{
                 backgroundColor: '#ffffff',
                 color: '#281819',
-                padding: 'clamp(8px, 0.6vw, 12px) clamp(14px, 1.4vw, 24px)',
-                fontSize: 'clamp(10px, 0.9vw, 16px)',
                 ...pillPositions[i],
               }}
             >
@@ -667,7 +663,7 @@ export default function Page() {
           <div className="flex flex-col gap-[4vw] lg:gap-[2vw]">
             {ROWS.map((row, rowIdx) => (
               <div key={row.label}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-[4vw] lg:gap-[2vw]">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-[4vw] lg:gap-[2vw]">
                   {row.cards.map((card, cardIdx) => {
                     const globalIdx = rowIdx * 2 + cardIdx;
                     return (
