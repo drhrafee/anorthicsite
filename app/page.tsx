@@ -145,60 +145,60 @@ type PillPos = { top?: string; bottom?: string; left?: string; right?: string };
 
 const ALL_PILL_POSITIONS: PillPos[][] = [
   [
-    { top: '25%', left: '6%' },
-    { top: '32%', right: '6%' },
-    { top: '52%', left: '8%' },
-    { top: '58%', right: '8%' },
-    { bottom: '8%', left: '12%' },
+    { top: '-6%', left: '-12%' },
+    { top: '-2%', right: '-10%' },
+    { top: '38%', left: '-16%' },
+    { top: '48%', right: '-12%' },
+    { bottom: '-8%', left: '10%' },
   ],
   [
-    { top: '32%', left: '6%' },
-    { top: '25%', right: '6%' },
-    { top: '58%', left: '8%' },
-    { top: '52%', right: '8%' },
-    { bottom: '8%', right: '12%' },
+    { top: '-2%', left: '-10%' },
+    { top: '-6%', right: '-12%' },
+    { top: '48%', left: '-12%' },
+    { top: '38%', right: '-16%' },
+    { bottom: '-8%', right: '10%' },
   ],
   [
-    { top: '24%', left: '8%' },
-    { top: '28%', right: '6%' },
-    { top: '50%', left: '6%' },
-    { top: '56%', right: '8%' },
-    { bottom: '8%', left: '16%' },
+    { top: '-5%', left: '-15%' },
+    { top: '-3%', right: '-8%' },
+    { top: '35%', left: '-10%' },
+    { top: '50%', right: '-15%' },
+    { bottom: '-8%', left: '15%' },
   ],
   [
-    { top: '28%', left: '6%' },
-    { top: '24%', right: '8%' },
-    { top: '56%', left: '8%' },
-    { top: '50%', right: '6%' },
-    { bottom: '8%', right: '16%' },
+    { top: '-3%', left: '-8%' },
+    { top: '-5%', right: '-15%' },
+    { top: '50%', left: '-15%' },
+    { top: '35%', right: '-10%' },
+    { bottom: '-8%', right: '15%' },
   ],
   [
-    { top: '26%', left: '5%' },
-    { top: '30%', right: '7%' },
-    { top: '53%', left: '9%' },
-    { top: '59%', right: '5%' },
-    { bottom: '8%', left: '14%' },
+    { top: '-7%', left: '-10%' },
+    { top: '-2%', right: '-14%' },
+    { top: '42%', left: '-18%' },
+    { top: '40%', right: '-8%' },
+    { bottom: '-8%', left: '8%' },
   ],
   [
-    { top: '30%', left: '7%' },
-    { top: '26%', right: '5%' },
-    { top: '59%', left: '5%' },
-    { top: '53%', right: '9%' },
-    { bottom: '8%', right: '14%' },
+    { top: '-2%', left: '-14%' },
+    { top: '-7%', right: '-10%' },
+    { top: '40%', left: '-8%' },
+    { top: '42%', right: '-18%' },
+    { bottom: '-8%', right: '8%' },
   ],
   [
-    { top: '25%', left: '9%' },
-    { top: '29%', right: '5%' },
-    { top: '51%', left: '7%' },
-    { top: '57%', right: '9%' },
-    { bottom: '8%', left: '15%' },
+    { top: '-4%', left: '-12%' },
+    { top: '-6%', right: '-12%' },
+    { top: '44%', left: '-12%' },
+    { top: '44%', right: '-12%' },
+    { bottom: '-8%', left: '12%' },
   ],
   [
-    { top: '29%', left: '5%' },
-    { top: '25%', right: '9%' },
-    { top: '57%', left: '9%' },
-    { top: '51%', right: '7%' },
-    { bottom: '8%', right: '15%' },
+    { top: '-6%', left: '-12%' },
+    { top: '-4%', right: '-12%' },
+    { top: '44%', left: '-12%' },
+    { top: '44%', right: '-12%' },
+    { bottom: '-8%', right: '12%' },
   ],
 ];
 
@@ -244,41 +244,60 @@ function ProjectCard({ card, pillPositions }: { card: CardData; pillPositions: P
         </h2>
       </div>
 
-      {/* Centered Image */}
+      {/* Centered Image Container (allows pills to overflow) */}
       {card.image ? (
-        <div className="relative w-[70%] h-[48%] rounded-[clamp(12px,1.6vw,32px)] overflow-hidden shadow-2xl border border-white/5">
-          <Image
-            src={card.image}
-            fill
-            className="object-cover"
-            alt={card.title}
-            sizes="(max-width: 768px) 70vw, 35vw"
-          />
+        <div className="relative w-[70%] h-[48%]">
+          {/* Rounded, overflow-hidden wrapper for image and its border */}
+          <div className="absolute inset-0 rounded-[clamp(12px,1.6vw,32px)] overflow-hidden shadow-2xl border border-white/5">
+            <Image
+              src={card.image}
+              fill
+              className="object-cover"
+              alt={card.title}
+              sizes="(max-width: 768px) 70vw, 35vw"
+            />
+          </div>
+
+          {/* Pill tags absolute-positioned relative to this image container */}
+          {card.pills.map((pill, i) => (
+            <span
+              key={pill}
+              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
+              style={{
+                backgroundColor: '#ffffff',
+                color: '#281819',
+                padding: 'clamp(8px, 0.6vw, 12px) clamp(14px, 1.4vw, 24px)',
+                fontSize: 'clamp(10px, 0.9vw, 16px)',
+                ...pillPositions[i],
+              }}
+            >
+              {pill}
+            </span>
+          ))}
         </div>
       ) : (
         <div
           className="relative pointer-events-none select-none w-[42%] aspect-square opacity-10"
         >
           <Image src="/logo.svg" fill className="object-contain" alt="" />
+          {/* Pill tags relative to fallback logo container */}
+          {card.pills.map((pill, i) => (
+            <span
+              key={pill}
+              className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
+              style={{
+                backgroundColor: '#ffffff',
+                color: '#281819',
+                padding: 'clamp(8px, 0.6vw, 12px) clamp(14px, 1.4vw, 24px)',
+                fontSize: 'clamp(10px, 0.9vw, 16px)',
+                ...pillPositions[i],
+              }}
+            >
+              {pill}
+            </span>
+          ))}
         </div>
       )}
-
-      {/* Pill tags */}
-      {card.pills.map((pill, i) => (
-        <span
-          key={pill}
-          className="absolute z-20 font-geist font-normal rounded-full whitespace-nowrap shadow-[0_4px_15px_rgba(40,24,25,0.12)] border border-cherry/5"
-          style={{
-            backgroundColor: '#ffffff',
-            color: '#281819',
-            padding: 'clamp(8px, 0.6vw, 12px) clamp(14px, 1.4vw, 24px)',
-            fontSize: 'clamp(10px, 0.9vw, 16px)',
-            ...pillPositions[i],
-          }}
-        >
-          {pill}
-        </span>
-      ))}
     </div>
   );
 }
